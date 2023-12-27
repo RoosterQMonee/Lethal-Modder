@@ -15,6 +15,7 @@ namespace Lethal_Modder
         #region Globals
 
         FileSystemWatcher watcher;
+        IDE ModEditor;
 
         private bool IsInstalled = false;
         private bool IsAwaiting = false;
@@ -34,12 +35,12 @@ namespace Lethal_Modder
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
-            int nLeftRect,
-            int nTopRect,
-            int nRightRect,
-            int nBottomRect,
-            int nWidthEllipse,
-            int nHeightEllipse
+            int nLeftRect,     // x-coordinate of upper-left corner
+            int nTopRect,      // y-coordinate of upper-left corner
+            int nRightRect,    // x-coordinate of lower-right corner
+            int nBottomRect,   // y-coordinate of lower-right corner
+            int nWidthEllipse, // width of ellipse
+            int nHeightEllipse // height of ellipse
         );
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -148,6 +149,12 @@ namespace Lethal_Modder
 
             UpdateStatus();
             UpdateModList();
+        }
+
+        private void OpenEditorButton_Click(object sender, EventArgs e)
+        {
+            ModEditor = new IDE();
+            ModEditor.Show();
         }
 
         #region Prototypes

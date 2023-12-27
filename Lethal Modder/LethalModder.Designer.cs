@@ -2,7 +2,15 @@
 {
     partial class LethalModder
     {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -14,6 +22,10 @@
 
         #region Windows Form Designer generated code
 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
@@ -22,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.RemoveButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.ModList = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -30,7 +43,7 @@
             this.OutputLog = new System.Windows.Forms.ListBox();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.RemoveButton = new System.Windows.Forms.Button();
+            this.OpenEditorButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -39,6 +52,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.panel1.Controls.Add(this.OpenEditorButton);
             this.panel1.Controls.Add(this.MinimizeButton);
             this.panel1.Controls.Add(this.ExitButton);
             this.panel1.Controls.Add(this.label2);
@@ -112,13 +126,31 @@
             this.panel2.Size = new System.Drawing.Size(374, 228);
             this.panel2.TabIndex = 1;
             // 
+            // RemoveButton
+            // 
+            this.RemoveButton.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RemoveButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.RemoveButton.Location = new System.Drawing.Point(91, 10);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(86, 21);
+            this.RemoveButton.TabIndex = 7;
+            this.RemoveButton.Text = "Remove Mods";
+            this.RemoveButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.RemoveButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            // 
             // DeleteButton
             // 
+            this.DeleteButton.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeleteButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DeleteButton.Location = new System.Drawing.Point(291, 10);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(65, 21);
             this.DeleteButton.TabIndex = 0;
             this.DeleteButton.Text = "Delete";
+            this.DeleteButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.DeleteButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.DeleteButton.UseVisualStyleBackColor = true;
             // 
             // ModList
@@ -202,15 +234,19 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Status:";
             // 
-            // RemoveButton
+            // OpenEditorButton
             // 
-            this.RemoveButton.Location = new System.Drawing.Point(91, 10);
-            this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(86, 21);
-            this.RemoveButton.TabIndex = 7;
-            this.RemoveButton.Text = "Remove Mods";
-            this.RemoveButton.UseVisualStyleBackColor = true;
-            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            this.OpenEditorButton.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OpenEditorButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.OpenEditorButton.Location = new System.Drawing.Point(323, 27);
+            this.OpenEditorButton.Name = "OpenEditorButton";
+            this.OpenEditorButton.Size = new System.Drawing.Size(106, 21);
+            this.OpenEditorButton.TabIndex = 8;
+            this.OpenEditorButton.Text = "Open Mod Creator";
+            this.OpenEditorButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.OpenEditorButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.OpenEditorButton.UseVisualStyleBackColor = true;
+            this.OpenEditorButton.Click += new System.EventHandler(this.OpenEditorButton_Click);
             // 
             // LethalModder
             // 
@@ -253,6 +289,7 @@
         private System.Windows.Forms.Button InstallButton;
         private System.Windows.Forms.ListBox OutputLog;
         private System.Windows.Forms.Button RemoveButton;
+        private System.Windows.Forms.Button OpenEditorButton;
     }
 }
 
