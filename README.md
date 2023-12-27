@@ -19,3 +19,11 @@ I made this because my friends couldn't figure out how to put a folder into anot
 2) press 'Setup Mods'
 3) put mods into {LC folder}/BepInEx/plugins
 4) start game :)
+
+### Todo:
+
+* Add a verified (and tested) mod list
+
+* Add a wiki / help page (on app and github)
+
+* Add a plugin IDE
