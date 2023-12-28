@@ -7,6 +7,8 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace Lethal_Modder
@@ -147,49 +149,14 @@ namespace Lethal_Modder
                 if (string.Format("{0}: {1}", mod.Display, mod.Author) == selected)
                 {
                     CheckInstallation();
-
-                    using (WebClient client = new WebClient())
-                        client.DownloadFile(mod.Url, GameLocation + "/DownloadedMod.zip");
-
-                    if (File.Exists(GameLocation + "/DownloadedMod.zip"))
-                        OutputLog.Items.Add("Loaded Mod!");
-
-                    else
-                        OutputLog.Items.Add("Failed install.");
-
-                    // ZipFile.ExtractToDirectory(GameLocation + "/DownloadedMod.zip", GameLocation);
-
-                    using (var strm = File.OpenRead(GameLocation + "/DownloadedMod.zip"))
-                        using (ZipArchive a = new ZipArchive(strm))
-                            ExtractToDirectoryOverwrite(a, GameLocation, true);
-
-
-                    File.Delete(GameLocation + "/DownloadedMod.zip");
+                    DownloadMod(mod.Url);
 
                     if (mod.Dependencies.Length > 0)
                         foreach (string dep in mod.Dependencies)
-                        {
-                            using (WebClient client = new WebClient())
-                                client.DownloadFile(dep, GameLocation + "/DownloadedReq.zip");
-
-                            if (File.Exists(GameLocation + "/DownloadedReq.zip"))
-                                OutputLog.Items.Add("Loaded Req!");
-
-                            else
-                                OutputLog.Items.Add("Failed install.");
-
-                            // ZipFile.ExtractToDirectory(GameLocation + "/DownloadedReq.zip", GameLocation);
-                            
-                            using (var strm = File.OpenRead(GameLocation + "/DownloadedReq.zip"))
-                                using (ZipArchive a = new ZipArchive(strm))
-                                    ExtractToDirectoryOverwrite(a, GameLocation, true);
-
-                            File.Delete(GameLocation + "/DownloadedReq.zip");
-                        }
+                            DownloadMod(dep);
 
                     IsInstalled = Directory.Exists(GameLocation + "/BepInEx");
                     UpdateStatus();
-
 
                     break;
                 }
@@ -201,8 +168,48 @@ namespace Lethal_Modder
             Process.Start(new ProcessStartInfo { FileName = GameLocation + "\\Lethal Company.exe", UseShellExecute = true });
         }
 
+        private void GetFromFile_Click(object sender, EventArgs e)
+        {
+            CheckInstallation();
+            
+            using (OpenFileDialog diag = new OpenFileDialog())
+            {
+                diag.InitialDirectory = @"c:\\";
+                diag.Filter = "mods files (*.mods)|*.mods";
+                diag.FilterIndex = 2;
+                diag.RestoreDirectory = true;
+
+                if (diag.ShowDialog() == DialogResult.OK)
+                {
+                    var lines = File.ReadLines(diag.FileName);
+                 
+                    foreach (string line in lines)
+                        DownloadMod(line);
+                }
+            }
+        }
 
         #region Utils
+
+        private void DownloadMod(string url)
+        {
+            using (WebClient client = new WebClient())
+                client.DownloadFile(url, GameLocation + "/DownloadedMod.zip");
+
+            if (File.Exists(GameLocation + "/DownloadedMod.zip"))
+                OutputLog.Items.Add("Loaded Mod!");
+
+            else
+                OutputLog.Items.Add("Failed install.");
+
+            // ZipFile.ExtractToDirectory(GameLocation + "/DownloadedMod.zip", GameLocation);
+
+            using (var strm = File.OpenRead(GameLocation + "/DownloadedMod.zip"))
+                using (ZipArchive a = new ZipArchive(strm))
+                    ExtractToDirectoryOverwrite(a, GameLocation, true);
+
+            File.Delete(GameLocation + "/DownloadedMod.zip");
+        }
 
         private void UpdateModList()
         {

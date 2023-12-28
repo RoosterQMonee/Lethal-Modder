@@ -40,6 +40,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.OutputLog = new System.Windows.Forms.ListBox();
             this.InstalledMods = new System.Windows.Forms.ListBox();
+            this.GetFromFile = new System.Windows.Forms.Button();
             this.TitleBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -47,6 +48,7 @@
             // TitleBar
             // 
             this.TitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.TitleBar.Controls.Add(this.GetFromFile);
             this.TitleBar.Controls.Add(this.StartButton);
             this.TitleBar.Controls.Add(this.MinimizeButton);
             this.TitleBar.Controls.Add(this.ExitButton);
@@ -188,6 +190,16 @@
             this.InstalledMods.Size = new System.Drawing.Size(453, 280);
             this.InstalledMods.TabIndex = 4;
             // 
+            // GetFromFile
+            // 
+            this.GetFromFile.Location = new System.Drawing.Point(382, 22);
+            this.GetFromFile.Name = "GetFromFile";
+            this.GetFromFile.Size = new System.Drawing.Size(106, 25);
+            this.GetFromFile.TabIndex = 12;
+            this.GetFromFile.Text = "Get From File";
+            this.GetFromFile.UseVisualStyleBackColor = true;
+            this.GetFromFile.Click += new System.EventHandler(this.GetFromFile_Click);
+            // 
             // ModList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -226,5 +238,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button InstallButton;
         private System.Windows.Forms.Button StartButton;
+        private System.Windows.Forms.Button GetFromFile;
     }
 }
