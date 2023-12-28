@@ -16,6 +16,7 @@ namespace Lethal_Modder
 
         FileSystemWatcher watcher;
         IDE ModEditor;
+        ModList ModInstaller;
 
         private bool IsInstalled = false;
         private bool IsAwaiting = false;
@@ -155,6 +156,12 @@ namespace Lethal_Modder
         {
             ModEditor = new IDE();
             ModEditor.Show();
+        }
+
+        private void OpenModList_Click(object sender, EventArgs e)
+        {
+            ModInstaller = new ModList();
+            ModInstaller.Show();
         }
 
         #region Prototypes

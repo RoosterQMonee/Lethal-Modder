@@ -44,6 +44,7 @@
             this.StatusLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.OpenEditorButton = new System.Windows.Forms.Button();
+            this.OpenModList = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -52,6 +53,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.panel1.Controls.Add(this.OpenModList);
             this.panel1.Controls.Add(this.OpenEditorButton);
             this.panel1.Controls.Add(this.MinimizeButton);
             this.panel1.Controls.Add(this.ExitButton);
@@ -238,15 +240,29 @@
             // 
             this.OpenEditorButton.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OpenEditorButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.OpenEditorButton.Location = new System.Drawing.Point(323, 27);
+            this.OpenEditorButton.Location = new System.Drawing.Point(309, 28);
             this.OpenEditorButton.Name = "OpenEditorButton";
-            this.OpenEditorButton.Size = new System.Drawing.Size(106, 21);
+            this.OpenEditorButton.Size = new System.Drawing.Size(88, 21);
             this.OpenEditorButton.TabIndex = 8;
-            this.OpenEditorButton.Text = "Open Mod Creator";
+            this.OpenEditorButton.Text = "Open Mod IDE";
             this.OpenEditorButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.OpenEditorButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.OpenEditorButton.UseVisualStyleBackColor = true;
             this.OpenEditorButton.Click += new System.EventHandler(this.OpenEditorButton_Click);
+            // 
+            // OpenModList
+            // 
+            this.OpenModList.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OpenModList.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.OpenModList.Location = new System.Drawing.Point(403, 28);
+            this.OpenModList.Name = "OpenModList";
+            this.OpenModList.Size = new System.Drawing.Size(88, 21);
+            this.OpenModList.TabIndex = 9;
+            this.OpenModList.Text = "Open Mod List";
+            this.OpenModList.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.OpenModList.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.OpenModList.UseVisualStyleBackColor = true;
+            this.OpenModList.Click += new System.EventHandler(this.OpenModList_Click);
             // 
             // LethalModder
             // 
@@ -290,6 +306,7 @@
         private System.Windows.Forms.ListBox OutputLog;
         private System.Windows.Forms.Button RemoveButton;
         private System.Windows.Forms.Button OpenEditorButton;
+        private System.Windows.Forms.Button OpenModList;
     }
 }
 
