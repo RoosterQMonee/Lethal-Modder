@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.TitleBar = new System.Windows.Forms.Panel();
+            this.StartButton = new System.Windows.Forms.Button();
             this.MinimizeButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,7 +40,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.OutputLog = new System.Windows.Forms.ListBox();
             this.InstalledMods = new System.Windows.Forms.ListBox();
-            this.StartButton = new System.Windows.Forms.Button();
             this.TitleBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +57,16 @@
             this.TitleBar.Size = new System.Drawing.Size(912, 64);
             this.TitleBar.TabIndex = 2;
             this.TitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleBar_MouseDown);
+            // 
+            // StartButton
+            // 
+            this.StartButton.Location = new System.Drawing.Point(494, 22);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(90, 25);
+            this.StartButton.TabIndex = 11;
+            this.StartButton.Text = "Start Game";
+            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // MinimizeButton
             // 
@@ -117,7 +127,7 @@
             this.panel1.Controls.Add(this.OutputLog);
             this.panel1.Location = new System.Drawing.Point(484, 70);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(162, 276);
+            this.panel1.Size = new System.Drawing.Size(162, 280);
             this.panel1.TabIndex = 3;
             // 
             // InstallButton
@@ -169,30 +179,21 @@
             // 
             this.InstalledMods.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.InstalledMods.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.InstalledMods.Font = new System.Drawing.Font("Cascadia Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InstalledMods.ForeColor = System.Drawing.SystemColors.Window;
             this.InstalledMods.FormattingEnabled = true;
-            this.InstalledMods.ItemHeight = 16;
+            this.InstalledMods.ItemHeight = 20;
             this.InstalledMods.Location = new System.Drawing.Point(12, 70);
             this.InstalledMods.Name = "InstalledMods";
-            this.InstalledMods.Size = new System.Drawing.Size(453, 272);
+            this.InstalledMods.Size = new System.Drawing.Size(453, 280);
             this.InstalledMods.TabIndex = 4;
-            // 
-            // StartButton
-            // 
-            this.StartButton.Location = new System.Drawing.Point(494, 22);
-            this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(90, 25);
-            this.StartButton.TabIndex = 11;
-            this.StartButton.Text = "Start Game";
-            this.StartButton.UseVisualStyleBackColor = true;
-            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // ModList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.ClientSize = new System.Drawing.Size(664, 360);
+            this.ClientSize = new System.Drawing.Size(664, 364);
             this.Controls.Add(this.InstalledMods);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.TitleBar);

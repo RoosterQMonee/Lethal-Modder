@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -17,16 +18,18 @@ namespace Lethal_Modder
 
         public class ModItem
         {
-            public ModItem(string Display, string Url, string Author)
+            public ModItem(string Display, string Url, string Author, string[] dependencies)
             {
                 this.Display = Display;
                 this.Url = Url;
                 this.Author = Author;
+                this.Dependencies = dependencies;
             }
 
             public string Display;
             public string Url;
             public string Author;
+            public string[] Dependencies;
         }
 
         FileSystemWatcher watcher;
@@ -67,13 +70,38 @@ namespace Lethal_Modder
         public ModList()
         {
             InitializeComponent();
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
             // makes it super easy to add more :)
-            InstalledModList.Add(new ModItem("LC API",       "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LC_API.zip", "2018"));
-            InstalledModList.Add(new ModItem("More Company", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/MoreCompany.zip", "notnotnotswipez"));
-            InstalledModList.Add(new ModItem("Late Company", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LateCompany.zip", "anormaltwig"));
-            InstalledModList.Add(new ModItem("More Suits",   "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/MoreSuits.zip", "x753"));
-            InstalledModList.Add(new ModItem("More Emotes",  "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/MoreEmotes.zip", "Sligili"));
+            InstalledModList.Add(new ModItem("LC API", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LC_API.zip", "2018", new string[]{  } ));
+            InstalledModList.Add(new ModItem("LethalLib", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LethalLib.zip", "Evaisa", new string[] { "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/HookGenPatcher.zip" }));
+            InstalledModList.Add(new ModItem("HookGenPatcher", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/HookGenPatcher.zip", "Evaisa", new string[] { }));
+            
+            InstalledModList.Add(new ModItem("More Company", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/MoreCompany.zip", "notnotnotswipez", new string[] {  }));
+            InstalledModList.Add(new ModItem("Late Company", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LateCompany.zip", "anormaltwig", new string[] {  }));
+            InstalledModList.Add(new ModItem("More Suits",   "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/MoreSuits.zip", "x753", new string[] {  }));
+            InstalledModList.Add(new ModItem("More Emotes",  "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/MoreEmotes.zip", "Sligili", new string[] {  }));
+            InstalledModList.Add(new ModItem("Additional Suits", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/AdditionalSuits.zip", "AlexCodesGames", new string[] { }));
+            InstalledModList.Add(new ModItem("Hide Chat", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/HideChat.zip", "Monkeytype", new string[] { }));
+            InstalledModList.Add(new ModItem("Brutal Company Plus", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/BrutalCompanyPlus.zip", "Nips", new string[] { }));
+            InstalledModList.Add(new ModItem("Employee Assignments", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/EmployeeAssignments.zip", "amnsoft", new string[] { }));
+            InstalledModList.Add(new ModItem("More (storage) Items", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/MoreItems.zip", "Drakorle", new string[] { }));
+            InstalledModList.Add(new ModItem("Lategame Upgrade", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LategameUpgrades.zip", "malco", new string[] { "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LethalLib.zip", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/HookGenPatcher.zip" }));
+            InstalledModList.Add(new ModItem("Helmet Cameras", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/HelmetCameras.zip", "RickArg", new string[] {  }));
+            InstalledModList.Add(new ModItem("LetMeLookDown", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LetMeLookDown.zip", "FlipMods", new string[] { }));
+            InstalledModList.Add(new ModItem("LCBetterSaves", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LCBetterSaves.zip", "Pooble", new string[] { }));
+            InstalledModList.Add(new ModItem("Weather Multipliers", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/WeatherMultipliers.zip", "Blorb", new string[] { }));
+            InstalledModList.Add(new ModItem("Lethal Escape", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LethalEscape.zip", "xCeezy", new string[] { }));
+
+            InstalledModList.Add(new ModItem("Yippie Hoarders", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/YippieMod.zip", "sunnobunno", new string[] {  }));
+            InstalledModList.Add(new ModItem("Lethal Things", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LethalThings.zip", "Evaisa", new string[] { "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LethalLib.zip", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/HookGenPatcher.zip" }));
+            InstalledModList.Add(new ModItem("Youtube Boombox", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/YoutubeBoombox.zip", "steven4547466", new string[] { "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LC_API.zip" }));
+            InstalledModList.Add(new ModItem("Landmine Fart Reverb", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LandmineFartReverb.zip", "sunnobunno", new string[] {  }));
+            InstalledModList.Add(new ModItem("Buyable Shotgun Shells", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/BuyableShotgunShells.zip", "MegaPiggy", new string[] { "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LethalLib.zip", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/HookGenPatcher.zip" }));
+            InstalledModList.Add(new ModItem("Mirror Decor", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/MirrorDecor.zip", "quackandcheese", new string[] { "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/LethalLib.zip", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/HookGenPatcher.zip" }));
+            InstalledModList.Add(new ModItem("Jump Delay Patch", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/JumpDelayPatch.zip", "monkes_mods", new string[] {  }));
+            InstalledModList.Add(new ModItem("1000 Quota Stare", "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/ThousandQuotaStare.zip", "ManiaBania", new string[] { "https://github.com/RoosterQMonee/Lethal-Modder/raw/main/VerifiedMods/MoreSuits.zip" }));
+            // InstalledModList.Add(new ModItem("name", "url", "author", new string[] { }));
         }
 
         private void ModList_Load(object sender, EventArgs e)
@@ -129,8 +157,35 @@ namespace Lethal_Modder
                     else
                         OutputLog.Items.Add("Failed install.");
 
-                    ZipFile.ExtractToDirectory(GameLocation + "/DownloadedMod.zip", GameLocation);
+                    // ZipFile.ExtractToDirectory(GameLocation + "/DownloadedMod.zip", GameLocation);
+
+                    using (var strm = File.OpenRead(GameLocation + "/DownloadedMod.zip"))
+                        using (ZipArchive a = new ZipArchive(strm))
+                            ExtractToDirectoryOverwrite(a, GameLocation, true);
+
+
                     File.Delete(GameLocation + "/DownloadedMod.zip");
+
+                    if (mod.Dependencies.Length > 0)
+                        foreach (string dep in mod.Dependencies)
+                        {
+                            using (WebClient client = new WebClient())
+                                client.DownloadFile(dep, GameLocation + "/DownloadedReq.zip");
+
+                            if (File.Exists(GameLocation + "/DownloadedReq.zip"))
+                                OutputLog.Items.Add("Loaded Req!");
+
+                            else
+                                OutputLog.Items.Add("Failed install.");
+
+                            // ZipFile.ExtractToDirectory(GameLocation + "/DownloadedReq.zip", GameLocation);
+                            
+                            using (var strm = File.OpenRead(GameLocation + "/DownloadedReq.zip"))
+                                using (ZipArchive a = new ZipArchive(strm))
+                                    ExtractToDirectoryOverwrite(a, GameLocation, true);
+
+                            File.Delete(GameLocation + "/DownloadedReq.zip");
+                        }
 
                     IsInstalled = Directory.Exists(GameLocation + "/BepInEx");
                     UpdateStatus();
@@ -183,6 +238,36 @@ namespace Lethal_Modder
         {
             StatusLabel.Text = IsInstalled ? "Enabled" : "Disabled";
             StatusLabel.ForeColor = IsInstalled ? Color.LightGreen : Color.IndianRed;
+        }
+
+        private void ExtractToDirectoryOverwrite(ZipArchive archive, string destinationDirectoryName, bool overwrite)
+        {
+            if (!overwrite)
+            {
+                archive.ExtractToDirectory(destinationDirectoryName);
+                return;
+            }
+
+            DirectoryInfo di = Directory.CreateDirectory(destinationDirectoryName);
+            string destinationDirectoryFullPath = di.FullName;
+
+            foreach (ZipArchiveEntry file in archive.Entries)
+            {
+                string completeFileName = Path.GetFullPath(Path.Combine(destinationDirectoryFullPath, file.FullName));
+
+                if (!completeFileName.StartsWith(destinationDirectoryFullPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new IOException("Trying to extract file outside of destination directory. See this link for more info: https://snyk.io/research/zip-slip-vulnerability");
+                }
+
+                if (file.Name == "")
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
+                    continue;
+                }
+
+                file.ExtractToFile(completeFileName, true);
+            }
         }
 
         #endregion
