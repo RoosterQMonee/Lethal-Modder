@@ -3,7 +3,7 @@
 A Lethal Company mod helper :)
 
 Info:
-> App Version: 1.0.0
+> App Version: 1.3
 >
 > Game Version: v45
 
